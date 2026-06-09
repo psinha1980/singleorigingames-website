@@ -1,0 +1,139 @@
+# singleorigingames.com — validation pipeline
+#
+# Runs on every push to main + every PR.
+# Catches breakage BEFORE it hits production.
+#
+# Jobs:
+#   1. html-validation  — w3c-style HTML validator on every .html
+#   2. app-ads-validation — strict format check on app-ads.txt
+#                            (one bad char = lost AdMob revenue)
+#   3. link-check       — every internal + external link must resolve
+#   4. lighthouse       — performance / accessibility / SEO score (advisory)
+#
+# Total runtime: ~2-3 minutes per push.
+
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  # Allow manual trigger from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # ─────────────────────────────────────────────────────────────
+  html-validation:
+    name: HTML validity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate HTML files
+        uses: Cyb3r-Jak3/html5validator-action@v7.2.0
+        with:
+          root: .
+          # Ignore noisy warnings that don't matter for a static site
+          extra: --ignore-re ".*XML.*" --also-check-css
+
+  # ─────────────────────────────────────────────────────────────
+  app-ads-validation:
+    name: app-ads.txt format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate app-ads.txt format
+        run: |
+          set -e
+          FILE="app-ads.txt"
+
+          if [ ! -f "$FILE" ]; then
+            echo "::error::app-ads.txt is missing — AdMob will lose verification"
+            exit 1
+          fi
+
+          # Each non-empty, non-comment line must match IAB spec:
+          #   domain, publisher_id, relationship[, cert_id]
+          # Relationship is DIRECT or RESELLER (case insensitive).
+          # Reject lines that don't match — would cost real revenue.
+          BAD=0
+          while IFS= read -r line || [ -n "$line" ]; do
+            # Strip carriage returns (Windows line endings)
+            line="${line%$'\r'}"
+            # Skip blank lines and comments
+            [ -z "$line" ] && continue
+            case "$line" in \#*) continue ;; esac
+
+            # Match: word.word, identifier, DIRECT|RESELLER [, hex]
+            if echo "$line" | grep -qiE '^[a-z0-9.-]+,[[:space:]]*[a-z0-9_-]+,[[:space:]]*(DIRECT|RESELLER)([[:space:]]*,[[:space:]]*[a-f0-9]+)?[[:space:]]*$'; then
+              echo "  ✓ $line"
+            else
+              echo "::error file=$FILE::Malformed line: $line"
+              BAD=$((BAD + 1))
+            fi
+          done < "$FILE"
+
+          if [ "$BAD" -gt 0 ]; then
+            echo "::error::$BAD malformed line(s) in app-ads.txt — AdMob will fail verification"
+            exit 1
+          fi
+
+          echo "✅ app-ads.txt is well-formed"
+
+      - name: Verify AdMob publisher ID present
+        run: |
+          # Soft check: the publisher ID for Single Origin Games' AdMob.
+          # If the line is removed, we lose AdMob app-ads.txt authorization.
+          if ! grep -q "pub-7717083762897022" app-ads.txt; then
+            echo "::warning::AdMob publisher ID pub-7717083762897022 not found in app-ads.txt"
+            exit 0  # warning, not fail — in case publisher ID changes
+          fi
+          echo "✅ AdMob publisher ID present"
+
+  # ─────────────────────────────────────────────────────────────
+  link-check:
+    name: Link integrity
+    runs-on: ubuntu-latest
+    continue-on-error: true  # advisory only — external sites flake
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --max-concurrency 5 --accept 200,206,403,429 './**/*.html' './**/*.md'
+          fail: false
+          output: ./lychee-report.md
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: link-check-report
+          path: ./lychee-report.md
+          retention-days: 7
+
+  # ─────────────────────────────────────────────────────────────
+  lighthouse:
+    name: Lighthouse score (advisory)
+    runs-on: ubuntu-latest
+    needs: html-validation
+    # Advisory only — don't fail the workflow on a low score.
+    # Trends over time are more useful than a single threshold.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Lighthouse against live site
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://singleorigingames.com/
+            https://singleorigingames.com/app-ads.txt
+          uploadArtifacts: true
+          temporaryPublicStorage: true

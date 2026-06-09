@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "ritwickdey.liveserver",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "DavidAnson.vscode-markdownlint",
+    "yzhang.markdown-all-in-one"
+  ],
+  "unwantedRecommendations": []
+}

@@ -1,0 +1,21 @@
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor noise
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Node tooling (if we ever use linters locally)
+node_modules/
+package-lock.json
+npm-debug.log*
+
+# Local dev temp
+.tmp/
+build/
+dist/
