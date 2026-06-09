@@ -69,7 +69,7 @@
         <li><strong>Firebase Crashlytics</strong> — automatic crash reports when something goes wrong. Includes device model and Android version. No personal data.</li>
         <li><strong>Google AdMob</strong> — serves the optional rewarded ads. AdMob uses your device's advertising ID (a resettable identifier you control in Android Settings → Google → Ads) to show relevant ads. See <a href="https://policies.google.com/privacy">Google's privacy policy</a>.</li>
         <li><strong>Google Play Billing</strong> — processes in-app purchases. Single Origin Games never sees your payment information.</li>
-        <li><strong>Google Play Games Services</strong> (Tycoon Era only) — used for optional cloud saves. Only when you explicitly opt in.</li>
+        <li><strong>Google Play Games Services</strong> — used for optional cloud saves and (in some games) sign-in. Only when you explicitly opt in. Both Tycoon Era and Fleet Magnate use this for cloud save.</li>
       </ul>
 
       <h3>From this website</h3>
@@ -105,8 +105,13 @@
       <h3>Opt out of personalized ads</h3>
       <p>Android Settings → Google → Ads → "Opt out of Ads Personalization." You can also reset your advertising ID from the same screen to start fresh.</p>
 
-      <h3>Opt out of analytics</h3>
-      <p>The games include a setting to disable analytics collection. Settings → Privacy → Analytics. Disabling this stops Firebase events from being sent. Crash reports are kept enabled by default because they're how we fix bugs that affect you — but you can disable those too in the same place.</p>
+      <h3>Opt out of analytics and personalized ads</h3>
+      <p>Each game has an in-game surface to manage these choices. The exact label varies:</p>
+      <ul>
+        <li><strong>Tycoon Era:</strong> Settings → Privacy → Analytics (toggle for analytics collection; crash reports can be disabled in the same place).</li>
+        <li><strong>Fleet Magnate:</strong> Settings → Ad preferences. This opens Google's standard consent dialog, where you can grant or revoke consent for personalized ads and analytics together. Available to users in regions where the dialog applies (EU, UK, EEA, Switzerland).</li>
+      </ul>
+      <p>For users in other regions where the consent dialog doesn't apply, you can opt out of ad personalization at the device level: Android Settings → Google → Ads → "Opt out of Ads Personalization." This is the most reliable way to disable personalized ads regardless of which game you're in.</p>
 
       <h3>Remove Ads entirely</h3>
       <p>If you'd rather not see ads at all, the "Remove Ads" in-app purchase is the cleanest path. One-time purchase, no subscription.</p>
@@ -150,7 +155,7 @@
         <li>Right to object to processing based on legitimate interests</li>
         <li>Right to lodge a complaint with your local supervisory authority</li>
       </ul>
-      <p>The legal basis for processing is your consent (for analytics and personalized ads) and contract performance (for in-app purchases). Consent can be withdrawn in the game's Settings → Privacy at any time.</p>
+      <p>The legal basis for processing is your consent (for analytics and personalized ads) and contract performance (for in-app purchases). Consent can be withdrawn at any time from inside each game — see the "Opt out of analytics and personalized ads" section above for the exact in-game path per title.</p>
 
       <h3>California (CCPA / CPRA)</h3>
       <p>California residents may request what categories of personal information we have collected and request its deletion. We do not sell or share personal information for cross-context behavioral advertising. We will not discriminate against you for exercising these rights.</p>
@@ -176,6 +181,14 @@
       <h2>Change log</h2>
       <p>Material changes to this policy are listed here with their effective date. We keep the full history so a user who agreed to an older version can see exactly what changed and when.</p>
 
+      <h3>2026-06-10 — v1.2</h3>
+      <ul>
+        <li>Corrected the Google Play Games Services entry — it's used by both Tycoon Era AND Fleet Magnate for cloud saves, not Tycoon Era only.</li>
+        <li>Split the "Opt out of analytics" section into per-game paths. Fleet Magnate uses Google's standard consent dialog (Settings → Ad preferences) which manages personalized ads and analytics together; Tycoon Era retains its dedicated Privacy → Analytics toggle.</li>
+        <li>Updated the GDPR consent-withdrawal paragraph to point at the same per-game paths.</li>
+        <li>No change to what data is collected; only accurate descriptions of where the in-game controls live.</li>
+      </ul>
+
       <h3>2026-06-10 — v1.1</h3>
       <ul>
         <li>Expanded the "Delete your game data" section to describe the three-layer deletion workflow (local save / cloud save / Firebase analytics) and the Privacy ID mechanism for analytics deletion requests.</li>
@@ -191,7 +204,7 @@
       </ul>
 
       <p class="last-updated">
-        Current version: v1.1<br>
+        Current version: v1.2<br>
         Last updated: 2026-06-10<br>
         Effective: 2026-06-10
       </p>
