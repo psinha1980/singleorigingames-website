@@ -25,6 +25,12 @@ on:
 permissions:
   contents: read
 
+# 2026-06-10: Force Node 24 for all JS actions before the 2026-06-16
+# auto-flip. Suppresses the deprecation warnings actions/checkout@v4
+# and actions/upload-artifact@v4 emit on Node 20 runners.
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 jobs:
   # ─────────────────────────────────────────────────────────────
   html-validation:
@@ -132,8 +138,9 @@ jobs:
       - name: Run Lighthouse against live site
         uses: treosh/lighthouse-ci-action@v12
         with:
+          # Only run against HTML pages — Lighthouse can't audit
+          # plain-text files like app-ads.txt.
           urls: |
             https://singleorigingames.com/
-            https://singleorigingames.com/app-ads.txt
           uploadArtifacts: true
           temporaryPublicStorage: true
