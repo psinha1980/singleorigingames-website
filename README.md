@@ -1,16 +1,32 @@
 # singleorigingames.com
 
-Studio landing page for [Single Origin Games](https://singleorigingames.com).
-Served by GitHub Pages, custom domain via Porkbun DNS, HTTPS via Let's
-Encrypt.
+Studio site for [Single Origin Games](https://singleorigingames.com).
+Static multi-page site served by GitHub Pages, custom domain via Porkbun
+DNS, HTTPS via Let's Encrypt.
 
 ## What lives here
 
+### Pages
+
 | File | Purpose |
 |---|---|
-| `index.html` | Studio landing page |
-| `app-ads.txt` | AdMob publisher verification (RFC IAB Tech Lab spec) |
+| `index.html` | Studio landing page (game cards link out to `games/`) |
+| `about.html` | About the studio |
+| `games/tycoon-era.html` | Tycoon Era game page |
+| `privacy.html` | Privacy policy (studio-wide) |
+| `support.html` | Support / contact |
+| `404.html` | Not-found page (served by GitHub Pages) |
+
+### Shared assets & config
+
+| File | Purpose |
+|---|---|
+| `css/style.css` | Shared stylesheet for every page |
+| `img/` | Logos, favicons, Apple touch icon, OG image, game icons |
+| `app-ads.txt` | AdMob publisher verification (IAB Tech Lab spec) |
 | `CNAME` | GitHub Pages custom-domain pointer (one line: the domain) |
+| `scripts/validate.ps1` | Local mirror of the CI validation checks |
+| `.github/workflows/validate.yml` | CI validation pipeline |
 
 ## Local dev workflow
 
@@ -42,11 +58,14 @@ git push                   # GitHub Pages redeploys in ~60 seconds
 
 ### What `validate.ps1` checks
 
-- Required files present (`index.html`, `app-ads.txt`, `CNAME`)
+- Required files present (`index.html`, `about.html`, `privacy.html`,
+  `support.html`, `404.html`, `css/style.css`, `app-ads.txt`, `CNAME`)
 - `app-ads.txt` follows the IAB spec (one bad char = lost AdMob revenue)
 - AdMob publisher ID present (`pub-7717083762897022`)
 - CNAME is exactly `singleorigingames.com`
-- `index.html` has DOCTYPE, charset, viewport, title
+- Every `.html` page has DOCTYPE, charset, viewport, title, and a
+  `meta description` (404 exempt)
+- Every internal `href="/..."` link resolves to a real file
 
 Same checks run in GitHub Actions on every push — local lets you catch
 errors before they leave your machine.
@@ -91,15 +110,26 @@ Live in ~60 seconds.
 
 ### Adding a new game?
 
-In `index.html`, duplicate the `.game` div block:
+Two steps:
 
-```html
-<div class="game">
-  <h2>NEW GAME NAME</h2>
-  <p>One-line description.</p>
-  <a href="https://play.google.com/store/apps/details?id=...">Get on Google Play →</a>
-</div>
-```
+1. **Create the game page.** Copy `games/tycoon-era.html` to
+   `games/<your-game>.html` and update the title, `meta description`,
+   copy, icon, and store link. It already pulls in `css/style.css`, so
+   it matches the rest of the site.
+
+2. **Link it from the homepage.** In `index.html`, duplicate an existing
+   game card and point it at the new page:
+
+   ```html
+   <a class="game-card" href="/games/your-game.html">
+     <img src="/img/your-game-icon.png" alt="Your Game icon">
+     <h2>Your Game Name</h2>
+     <p>One-line description.</p>
+   </a>
+   ```
+
+Run `./scripts/validate.ps1` before pushing — the internal-link check
+will fail if the card points at a page (or icon) that doesn't exist yet.
 
 ### Updating app-ads.txt
 
