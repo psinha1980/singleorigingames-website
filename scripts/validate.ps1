@@ -13,7 +13,7 @@ Set-Location $root
 $failed = $false
 
 Write-Host '==> Checking required files exist...' -ForegroundColor Cyan
-$required = @('index.html', 'app-ads.txt', 'CNAME')
+$required = @('index.html', 'app-ads.txt', 'CNAME', 'about.html', 'privacy.html', 'support.html', '404.html', 'css/style.css')
 foreach ($f in $required) {
     if (-not (Test-Path $f)) {
         Write-Host "    MISSING: $f" -ForegroundColor Red
@@ -66,27 +66,51 @@ else {
 }
 
 Write-Host ''
-Write-Host '==> Checking index.html for common issues...' -ForegroundColor Cyan
-$html = Get-Content 'index.html' -Raw
-$ok = $true
-if ($html -notmatch '<!DOCTYPE html>') {
-    Write-Host '    MISSING: DOCTYPE' -ForegroundColor Red
-    $ok = $false; $failed = $true
+Write-Host '==> Checking HTML pages for required tags...' -ForegroundColor Cyan
+$htmlFiles = @(Get-ChildItem -Path . -Filter '*.html' -Recurse | Where-Object { $_.FullName -notlike '*node_modules*' })
+foreach ($file in $htmlFiles) {
+    $html = Get-Content $file.FullName -Raw
+    $relPath = $file.FullName.Substring($root.Length + 1).Replace('\', '/')
+    $issues = @()
+    if ($html -notmatch '<!DOCTYPE html>') { $issues += 'DOCTYPE' }
+    if ($html -notmatch '<meta\s+charset=') { $issues += 'charset' }
+    if ($html -notmatch '<meta\s+name="viewport"') { $issues += 'viewport' }
+    if ($html -notmatch '<title>') { $issues += 'title' }
+    if ($html -notmatch '<meta\s+name="description"' -and $file.Name -ne '404.html') { $issues += 'description' }
+    if ($issues.Count -eq 0) {
+        Write-Host "    OK: $relPath"
+    }
+    else {
+        Write-Host "    $relPath -- missing: $($issues -join ', ')" -ForegroundColor Red
+        $failed = $true
+    }
 }
-if ($html -notmatch '<meta\s+charset=') {
-    Write-Host '    MISSING: charset meta tag' -ForegroundColor Red
-    $ok = $false; $failed = $true
+
+Write-Host ''
+Write-Host '==> Checking internal links resolve to files...' -ForegroundColor Cyan
+$brokenLinks = 0
+foreach ($file in $htmlFiles) {
+    $html = Get-Content $file.FullName -Raw
+    $matches = [regex]::Matches($html, 'href="(/[^"#?]+)"')
+    foreach ($match in $matches) {
+        $link = $match.Groups[1].Value
+        # Strip query/fragment, normalize
+        $target = Join-Path $root $link.TrimStart('/').Replace('/', '\')
+        # Directory-style links get treated as /index.html implicitly
+        if ($link.EndsWith('/')) { $target = Join-Path $target 'index.html' }
+        if (-not (Test-Path $target)) {
+            $relPath = $file.FullName.Substring($root.Length + 1).Replace('\', '/')
+            Write-Host "    $relPath -> $link -- TARGET MISSING" -ForegroundColor Red
+            $brokenLinks++
+        }
+    }
 }
-if ($html -notmatch '<meta\s+name="viewport"') {
-    Write-Host '    MISSING: viewport meta tag' -ForegroundColor Red
-    $ok = $false; $failed = $true
+if ($brokenLinks -eq 0) {
+    Write-Host '    OK: all internal links resolve'
 }
-if ($html -notmatch '<title>') {
-    Write-Host '    MISSING: title' -ForegroundColor Red
-    $ok = $false; $failed = $true
-}
-if ($ok) {
-    Write-Host '    OK: DOCTYPE, charset, viewport, title all present'
+else {
+    Write-Host "    $brokenLinks broken link(s)" -ForegroundColor Red
+    $failed = $true
 }
 
 Write-Host ''

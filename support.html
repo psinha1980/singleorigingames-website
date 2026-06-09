@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support — Single Origin Games</title>
+<meta name="description" content="How to reach Single Origin Games. Common questions, bug reports, account help.">
+<meta name="theme-color" content="#0E1A2B">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="/" class="site-header__brand">
+      <img src="/img/logo-64.png" alt="" aria-hidden="true">
+      <span>Single Origin Games</span>
+    </a>
+    <nav class="site-header__nav">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/support.html" class="active">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container container-narrow">
+
+    <section class="page-header">
+      <h1>Support</h1>
+      <p class="page-header__subtitle">A real human reads every email. Usually within 24-48 hours.</p>
+    </section>
+
+    <article class="prose">
+
+      <h2>Get in touch</h2>
+      <p>The fastest path is email:</p>
+      <p style="font-size: 22px; text-align: center; padding: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); margin: 32px 0;">
+        <a href="mailto:singleorigingames@gmail.com">singleorigingames@gmail.com</a>
+      </p>
+      <p>Each game also has a "Report Issue" button inside Settings that pre-fills the version number, your device, and useful debug info. Use that if you can — it cuts triage time in half.</p>
+
+      <h2>Common questions</h2>
+
+      <h3>I lost my progress after reinstalling</h3>
+      <p>If you opted into Google Play Cloud Save before uninstalling, your save is recoverable: install the game again, sign into the same Google account, and on first launch you'll be offered the cloud save. If you didn't opt in, the local save was tied to that install and is gone — there's no way for us to recover it server-side because we don't have it.</p>
+
+      <h3>I paid for VIP / Pass / Starter Pack and don't see it</h3>
+      <p>Settings → Restore Purchases. If that doesn't fix it within 30 seconds, email us with your Google Play order ID (you can find it in your Google Play purchase history) and we'll fix it manually within 24 hours.</p>
+
+      <h3>How do I cancel the Tycoon Pass subscription?</h3>
+      <p>The Pass is a Google Play subscription. Cancel it through Google Play → Subscriptions, not through the game. Your benefits continue until the end of the current billing period.</p>
+
+      <h3>I want a refund</h3>
+      <p>Refund eligibility is handled by Google Play, not by us. Open Google Play → your purchase history → request a refund. Google's policy generally allows refunds within 48 hours of purchase. We can't process refunds directly but we won't object to legitimate refund requests.</p>
+
+      <h3>The game crashes on startup</h3>
+      <p>Force-stop the app (Android Settings → Apps → [game name] → Force stop), then reopen. If the crash persists, try clearing the app cache (NOT the app data — that wipes your save). If it still crashes, email us with your device model, Android version, and what you were doing when it happened.</p>
+
+      <h3>How do I delete all my data?</h3>
+      <p>In-game: Settings → Reset Progress wipes your local save. If you opted into cloud save, also use Settings → Cloud Save → Delete Cloud Save. After both, nothing about you remains anywhere we control. Firebase analytics events are anonymous and can't be tied back to you to delete individually.</p>
+
+      <h2>Bug reports</h2>
+      <p>The most helpful bug reports include:</p>
+      <ul>
+        <li>What you were doing (1-2 sentences is fine)</li>
+        <li>What you expected vs what actually happened</li>
+        <li>Your device model and Android version</li>
+        <li>The app version (Settings → bottom of screen)</li>
+        <li>A screenshot if it's a UI issue</li>
+        <li>If something feels wrong with the economy: which business tier you're on and roughly your lifetime earnings</li>
+      </ul>
+      <p>The in-game "Report Issue" button auto-fills most of these. Just describe the issue in 1-2 sentences and tap Send.</p>
+
+      <h2>Feedback &amp; feature requests</h2>
+      <p>Same email. We read everything. Most game updates come from real player feedback. We can't promise to ship every request, but every email gets read.</p>
+
+      <hr>
+
+      <p style="color: var(--muted); font-size: 15px;">
+        Single Origin Games is a one-person studio. Response times reflect that — typically 24-48 hours during the week, longer on weekends. If you haven't heard back in 5 business days, please email again. Spam filters happen.
+      </p>
+
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__cols">
+      <div class="site-footer__brand">
+        <div class="site-footer__brand-mark">
+          <img src="/img/logo-64.png" alt="" aria-hidden="true">
+          <span>Single Origin Games</span>
+        </div>
+        <p>Solo indie studio crafting idle tycoon and simulator games. Real economies, parody humor, no dark patterns.</p>
+      </div>
+      <div class="site-footer__col">
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/support.html">Support</a></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <h4>Games</h4>
+        <ul>
+          <li><a href="/games/tycoon-era.html">Tycoon Era</a></li>
+          <li><a href="#" style="opacity: 0.5; pointer-events: none;">Fleet Magnate (soon)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__legal">
+      <span>© 2026 Single Origin Games</span>
+      <span><a href="mailto:singleorigingames@gmail.com" style="color: var(--muted);">singleorigingames@gmail.com</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -3,66 +3,167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Single Origin Games</title>
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #0E1A2B;
-  color: #FFFBF0;
-  min-height: 100vh;
-  padding: 40px 20px;
-}
-.container { max-width: 600px; margin: 0 auto; text-align: center; }
-h1 { font-size: 36px; margin-bottom: 8px; color: #FFD66B; }
-.tagline { color: #aaa; margin-bottom: 40px; font-size: 16px; }
-.game {
-  background: #1A2336;
-  padding: 24px;
-  border-radius: 16px;
-  margin: 16px 0;
-  text-align: left;
-}
-.game h2 { margin-bottom: 12px; color: #FFFBF0; }
-.game p { color: #ccc; margin-bottom: 16px; }
-.game a {
-  display: inline-block;
-  padding: 10px 20px;
-  background: #2B7CE9;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: 600;
-}
-.game a:hover { background: #4A9CFA; }
-.footer {
-  color: #666;
-  font-size: 12px;
-  margin-top: 60px;
-  text-align: center;
-}
-.footer a { color: #4A9CFA; text-decoration: none; }
-</style>
+<title>Single Origin Games — Indie idle tycoon &amp; simulator games</title>
+<meta name="description" content="A solo indie studio crafting idle tycoon and simulator games. Real economies, parody humor, slow-burn progression. No dark patterns.">
+<meta name="theme-color" content="#0E1A2B">
+
+<!-- Open Graph / social -->
+<meta property="og:title" content="Single Origin Games">
+<meta property="og:description" content="Indie idle tycoon &amp; simulator games. Real economies, patient pacing, no dark patterns.">
+<meta property="og:image" content="https://singleorigingames.com/img/og-image.png">
+<meta property="og:url" content="https://singleorigingames.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Single Origin Games">
+<meta name="twitter:description" content="Indie idle tycoon &amp; simulator games. No dark patterns.">
+<meta name="twitter:image" content="https://singleorigingames.com/img/og-image.png">
+
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
-  <h1>🪐 Single Origin Games</h1>
-  <p class="tagline">Indie idle games.<br>Making games + sharing the journey.</p>
 
-  <div class="game">
-    <h2>Tycoon Era: Idle Money Empire</h2>
-    <p>An idle business tycoon with parody tickers and a 6-era arc planned.</p>
-    <a href="https://play.google.com/store/apps/details?id=io.github.psinha1980.tycoon_era">Get on Google Play →</a>
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="/" class="site-header__brand">
+      <img src="/img/logo-64.png" alt="" aria-hidden="true">
+      <span>Single Origin Games</span>
+    </a>
+    <nav class="site-header__nav">
+      <a href="/" class="active">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/support.html">Support</a>
+    </nav>
   </div>
+</header>
 
-  <div class="game">
-    <h2>Fleet Magnate Transport Tycoon</h2>
-    <p>Coming soon.</p>
+<main>
+
+  <section class="hero container">
+    <img src="/img/logo-256.png" alt="" class="hero__logo" aria-hidden="true">
+    <h1>Single Origin Games</h1>
+    <p class="hero__tagline">
+      Solo indie studio crafting idle tycoon and simulator games.<br>
+      Real economies. Patient pacing. No dark patterns.
+    </p>
+    <div class="hero__cta">
+      <a href="#games" class="btn btn--primary">
+        Browse games
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </a>
+    </div>
+  </section>
+
+  <section id="games" class="section container">
+    <div class="section__eyebrow">Our games</div>
+    <h2 class="section__title">Built with patience</h2>
+    <p class="section__subtitle">
+      Each game ships when it's ready. No FOMO timers, no fake countdowns, no manipulative pop-ups.
+    </p>
+
+    <div class="games">
+      <a href="/games/tycoon-era.html" class="game-card">
+        <span class="game-card__badge game-card__badge--live">Available now</span>
+        <h3>Tycoon Era: Idle Money Empire</h3>
+        <p class="game-card__desc">
+          Build an empire from a lemonade stand to space tourism. An idle business tycoon with rich economies, parody tickers, and a multi-era arc.
+        </p>
+        <div class="game-card__meta">
+          <span class="game-card__chip">Idle</span>
+          <span class="game-card__chip">Tycoon</span>
+          <span class="game-card__chip">Free</span>
+        </div>
+        <span class="btn btn--secondary">Read more →</span>
+      </a>
+
+      <div class="game-card" style="cursor: default;">
+        <span class="game-card__badge game-card__badge--soon">Coming soon</span>
+        <h3>Fleet Magnate: Transport Tycoon</h3>
+        <p class="game-card__desc">
+          Build a transport empire one contract at a time. Manage drivers, vehicles, and routes through five phases — from solo gig worker to fleet magnate.
+        </p>
+        <div class="game-card__meta">
+          <span class="game-card__chip">Simulator</span>
+          <span class="game-card__chip">Tycoon</span>
+          <span class="game-card__chip">Closed Testing</span>
+        </div>
+        <span class="btn btn--disabled">In testing</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="section__eyebrow">What we stand for</div>
+    <h2 class="section__title">Three commitments</h2>
+    <p class="section__subtitle">
+      These aren't marketing words. They're the rules we hold ourselves to when designing every system.
+    </p>
+
+    <div class="values">
+      <div class="value">
+        <span class="value__icon">📊</span>
+        <h3>Real economies</h3>
+        <p>Numbers that mean something. Every cost, every reward, every unit cycle ties back to a real progression curve — not arbitrary timers.</p>
+      </div>
+      <div class="value">
+        <span class="value__icon">⏳</span>
+        <h3>Patient pacing</h3>
+        <p>Slow-burn progression by design. Endgame should feel earned, not paid for. Sessions reward depth over frequency.</p>
+      </div>
+      <div class="value">
+        <span class="value__icon">🚫</span>
+        <h3>No dark patterns</h3>
+        <p>No energy gates, no fake countdowns, no manipulative pop-ups, no opt-in subscriptions hiding renewal terms. The rules are visible and stable.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__cols">
+      <div class="site-footer__brand">
+        <div class="site-footer__brand-mark">
+          <img src="/img/logo-64.png" alt="" aria-hidden="true">
+          <span>Single Origin Games</span>
+        </div>
+        <p>Solo indie studio crafting idle tycoon and simulator games. Real economies, parody humor, no dark patterns.</p>
+      </div>
+
+      <div class="site-footer__col">
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/support.html">Support</a></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h4>Games</h4>
+        <ul>
+          <li><a href="/games/tycoon-era.html">Tycoon Era</a></li>
+          <li><a href="#" style="opacity: 0.5; pointer-events: none;">Fleet Magnate (soon)</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__legal">
+      <span>© 2026 Single Origin Games</span>
+      <span><a href="mailto:singleorigingames@gmail.com" style="color: var(--muted);">singleorigingames@gmail.com</a></span>
+    </div>
   </div>
+</footer>
 
-  <p class="footer">
-    © 2026 Single Origin Games · <a href="mailto:singleorigingames@gmail.com">Contact</a>
-  </p>
-</div>
 </body>
 </html>
