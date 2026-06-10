@@ -118,18 +118,26 @@ Two steps:
    it matches the rest of the site.
 
 2. **Link it from the homepage.** In `index.html`, duplicate an existing
-   game card and point it at the new page:
+   `.game-card` inside the `.games` grid and point it at the new page:
 
    ```html
-   <a class="game-card" href="/games/your-game.html">
-     <img src="/img/your-game-icon.png" alt="Your Game icon">
-     <h2>Your Game Name</h2>
-     <p>One-line description.</p>
+   <a href="/games/your-game.html" class="game-card">
+     <span class="game-card__badge game-card__badge--live">Available now</span>
+     <h3>Your Game Name</h3>
+     <p class="game-card__desc">One-line description.</p>
+     <div class="game-card__meta">
+       <span class="game-card__chip">Idle</span>
+       <span class="game-card__chip">Free</span>
+     </div>
+     <span class="btn btn--secondary">Read more →</span>
    </a>
    ```
 
+   For a not-yet-released game, use a non-linking `<div class="game-card">`
+   with the `game-card__badge--soon` badge (see the Fleet Magnate card).
+
 Run `./scripts/validate.ps1` before pushing — the internal-link check
-will fail if the card points at a page (or icon) that doesn't exist yet.
+will fail if the card points at a page that doesn't exist yet.
 
 ### Updating app-ads.txt
 
