@@ -46,12 +46,12 @@ if ($bad -gt 0) {
 }
 
 Write-Host ''
-Write-Host '==> Checking AdMob publisher ID...' -ForegroundColor Cyan
-if ((Get-Content 'app-ads.txt' -Raw) -notmatch 'pub-7717083762897022') {
-    Write-Host '    WARN: AdMob publisher ID pub-7717083762897022 not found' -ForegroundColor Yellow
+Write-Host '==> Checking Unity Ads Org Core ID...' -ForegroundColor Cyan
+if ((Get-Content 'app-ads.txt' -Raw) -notmatch 'unity3d\.com,\s*13469858174961') {
+    Write-Host '    WARN: Unity Ads org core ID 13469858174961 not found' -ForegroundColor Yellow
 }
 else {
-    Write-Host '    OK: pub-7717083762897022 present'
+    Write-Host '    OK: unity3d.com 13469858174961 present'
 }
 
 Write-Host ''
